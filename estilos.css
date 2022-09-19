@@ -21,7 +21,7 @@ menu {
     width: 100%;
 }
 .boton {
-    transform: translateY(-4000%) translateX(400%);
+    transform: translateX(600px);
     font-size: 20px;
     border-width: 1px;
     width: 10%;

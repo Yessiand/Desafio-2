@@ -52,20 +52,18 @@
     </nav>
 <!-- Fin del header -->
 <!-- Inicio del main -->
-    <div>
-        <picture>
-            <img class="fondo" src="./recursos/fondoinicial.png" alt="">
-        </picture>
-    </div> 
+    
 
-    <div class="titulo">
+    <div>
         <h1>Psicologia sistemica</h1>
         <p>Este es un simulador de preguntas sobre la psicologia sistemica, tendras 30 minutos para responder las preguntas, cuando finalices podras revisar tus resultados. Solo deberas seleccionar la respuesta correcta para cada pregunta...  pon a prueba tus conocimientos en este area de la psicologia</p>
+        <button class="boton" onclick="iniciarTest()">Comenzar el test</button>
+        <div id="respuestaAcertada"></div>
     </div>
     <div>
-        <h1 class="text-center" id="count-down-timer"></h1>
-        <p class="boton">Comienza el test</p>
+        <div>El test termina en <span id="time">05:00</span> minutos!</div>
     </div>
+    
 <!-- Fin del main -->
 <!-- Inicio del Footer -->
 <footer>
