@@ -16,7 +16,22 @@ class Pregunta {
 }
 
 /*REGISTRO PARA EL TEST*/
-function registro() {
+const formulario = document.querySelector("form");
+
+const nombre = document.querySelector("#name");
+
+const email = document.querySelector("#email");
+
+const mensaje = document.querySelector("#mensaje");
+
+formulario.addEventListener("submit", validarFormulario);
+
+function validarFormulario (event){
+    event.preventDefault();
+    console.log(nombre.value + ' - ' + email.value + ' - ' + mensaje.value);
+}
+
+/*function registro() {
     let opciones = Number(
         prompt(`Si desea registrarse ingrese 1 
     \nSi ya se encuentra registrado ingrese 2 
@@ -64,9 +79,10 @@ function logeo(user, clave) {
     clave = prompt("Ingrese clave");
 
     alert(`Bienvenido ${user} a psique`);
-}
+}*/
 
 //CONTADOR DE TIEMPO, DEBO CONTINUAR TRABAJANDO EN EL//
+
 function startTimer(duration, display) {
     var timer = duration,
         minutes,
@@ -85,7 +101,6 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
-
 function iniciarPreguntas() {
     //PREGUNTA NUMERO 1//
     const opcionesPreguntaUno = [

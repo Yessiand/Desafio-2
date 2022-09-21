@@ -17,6 +17,8 @@ menu {
     position: sticky;
 }
 /*MAIN*/
+/* FORMULARIO */
+
 .fondo {  
     width: 100%;
 }
@@ -33,6 +35,8 @@ menu {
 .titulo {
     transform: translateY(-1000%) translateX(1%);
 }
+
+
 /*FOOTER*/
 footer {
     display: grid;

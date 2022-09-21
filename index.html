@@ -52,10 +52,50 @@
     </nav>
 <!-- Fin del header -->
 <!-- Inicio del main -->
-    
+    <section class="container">
+        <div class="offset-md-3">
+            <form id="" action="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="">INGRESA TUS DATOS</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label id="">Nombre y apellidos</label>
+                        <input placeholder="Jhon Smith" type="text" name="nombre" id="name" class="form-control">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group  col-md-6">
+                        <label id="">Correo electronico</label>
+                        <input placeholder="email@dominio.com" type="text" name="email" id="email" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group  col-md-6">
+                        <label id="">Recomendaciones</label>
+                        <textarea placeholder="Comentarios" name="mensaje" id="mensaje" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-lg btn-dark">ENVIAR</button>
+                    </div>
+                </div>
+
+                
+                
+            </form>
+        </div>  
+    </section>
 
     <div>
-        <h1>Psicologia sistemica</h1>
+        <h1 id="titulo">Psicologia sistemica</h1>
         <p>Este es un simulador de preguntas sobre la psicologia sistemica, tendras 30 minutos para responder las preguntas, cuando finalices podras revisar tus resultados. Solo deberas seleccionar la respuesta correcta para cada pregunta...  pon a prueba tus conocimientos en este area de la psicologia</p>
         <button class="boton" onclick="iniciarTest()">Comenzar el test</button>
         <div id="respuestaAcertada"></div>
