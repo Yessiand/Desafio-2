@@ -35,16 +35,10 @@
                     <a class="nav-link" href="./index.html">Inicio<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./paginas/sobremi.html">Conoceme</a>
+                    <a class="nav-link" href="./paginas/sobremi.html">Acerca de nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./paginas/servicios.html">servicios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./paginas/blog.html">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./paginas/formulario.html">Contactanos</a>
+                    <a class="nav-link" href="./paginas/servicios.html">Questionarios</a>
                 </li>
             </ul>
             <span class="navbar-text"></span>
@@ -52,9 +46,15 @@
     </nav>
 <!-- Fin del header -->
 <!-- Inicio del main -->
+<div>
+    <h1 id="titulo">Psicologia sistemica</h1>
+        <p class="parrafo">Este es un simulador de preguntas sobre la psicologia sistemica, tendras 5 minutos para responder las preguntas, cuando finalices podras revisar tus resultados. 
+            Solo deberas seleccionar la respuesta correcta para cada pregunta...  pon a prueba tus conocimientos en este area de la psicologia. Ingresa tus datos en el formulario para enviar los resultados a tu correo</p>
+</div>
+<!-- Formulario -->
     <section class="container">
         <div class="offset-md-3">
-            <form id="" action="">
+            <form id="formulario" action="">
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="">INGRESA TUS DATOS</h2>
@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label id="">Nombre y apellidos</label>
-                        <input placeholder="Jhon Smith" type="text" name="nombre" id="name" class="form-control">
+                        <input placeholder="Jhon Smith" type="text" name="nombre" id="nombre" class="form-control">
                     </div>
                 </div>
                 
@@ -84,25 +84,25 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button class="btn btn-lg btn-dark">ENVIAR</button>
+                        <button class="enviar" >Enviar</button>
                     </div>
                 </div>
-
-                
-                
             </form>
         </div>  
     </section>
 
     <div>
-        <h1 id="titulo">Psicologia sistemica</h1>
-        <p>Este es un simulador de preguntas sobre la psicologia sistemica, tendras 30 minutos para responder las preguntas, cuando finalices podras revisar tus resultados. Solo deberas seleccionar la respuesta correcta para cada pregunta...  pon a prueba tus conocimientos en este area de la psicologia</p>
+        <p class="parrafo">Pincha comenzar test</p>
         <button class="boton" onclick="iniciarTest()">Comenzar el test</button>
         <div id="respuestaAcertada"></div>
     </div>
     <div>
-        <div>El test termina en <span id="time">05:00</span> minutos!</div>
+        <div class="parrafo">El test termina en <span id="time">05:00</span> minutos!</div>
     </div>
+
+    <div  id="test"></div>
+    <button  id="boton">Comprobar</button>
+    <div id="resultado"></div>
     
 <!-- Fin del main -->
 <!-- Inicio del Footer -->
