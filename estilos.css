@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet');
+
+body {
+    font-family: "EB Garamond", serif;
+    font-weight:400;
+    font-size: 19px;
+}
 /*HEADER*/
 header {
     background-color:#900C3F;
@@ -13,29 +20,100 @@ menu {
 }
 .color_nav {
     background-color: #581845;
-    font-size: 18px;
+    font-size: 21px;
     position: sticky;
 }
-/*MAIN*/
+
 /* FORMULARIO */
+
+form {
+    margin-top: 5%;
+}
 
 .fondo {  
     width: 100%;
 }
-.boton {
-    transform: translateX(600px);
-    font-size: 20px;
-    border-width: 1px;
-    width: 10%;
-    text-align: center;
-    font-size: 16px;
-    border-style: solid;
-    border-color: black;
-}
-.titulo {
-    transform: translateY(-1000%) translateX(1%);
+.enviar {
+    background-color: #7a2460;
+    color: #ffffff;
+    font-size: 23px;
+    margin-top: 5%;
+    border-radius: 1cm;
+    margin-block-end: 4%;
 }
 
+
+/* SIMULADOR */
+.boton {
+    background-image: linear-gradient(180deg, #681464, #e65e92);
+    color: #ffffff;
+    transform: translateX(600px);
+    font-size: 26px ; 
+    border-width: 1px;
+    width: 15%;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.1);
+	text-decoration: none;
+	transition: all ease 0.5s;
+	background:#900C3F;
+}
+.boton:after,
+.boton:before{
+	width: 80px;
+	height: 100px;
+	content: '';
+	display: block;
+	background: rgba(255, 255, 255, 0.986);
+	transform: rotate(45deg);
+	top: -60px;
+	position: absolute;
+	transition: none;
+	right:-45%;
+	cursor: pointer;
+}
+.boton:before{
+	left: -48%;
+}
+
+.boton:hover{
+	text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+	background:#ad0676
+}
+.boton:hover:after,
+.boton:hover:before{
+	transform: rotate(45deg), scaleX(130%);
+	background: rgba(255,255,255,0.1);
+	transition: all ease 0.5s;
+}
+.boton:hover:after{
+	right: 130%;
+}
+.boton:hover:before{
+	left: 130%;
+}
+
+#titulo {
+    width: 20%;
+    transform: translateX(600px);
+    margin-top: 2%;
+}
+.parrafo {
+    margin-left: 1%;
+}
+#boton {
+    background-color: #7a2460;
+    color: #ffffff;
+    font-size: 22px;
+    margin-top: 5%;
+    border-radius: 1cm;
+    margin-block-end: 4%;
+    transform: translateX(342%)
+    
+}
+
+
+#test {
+    margin-left: 5%;
+}
 
 /*FOOTER*/
 footer {
