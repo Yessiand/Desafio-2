@@ -16,8 +16,9 @@ function validarFormulario(event) {
     }
 
     // Se accede a los valores del objeto y se muestra un mensaje por pantalla
-    console.log(registro.nombre + ' - ' + registro.email + ' - ' + registro.mensaje);
-    alert("Muchas gracias " + registro.nombre + " por enviar el formulario");
+    const {nombre,email,mensaje} = registro;
+    console.log(nombre + ' - ' + email + ' - ' + mensaje);
+    alert("Muchas gracias " + nombre + " por enviar el formulario");
 
     // Se codifica el objeto como un JSON String y se almacena en el LocalStorage
     const objetoRegistroComoJsonString = JSON.stringify(registro);
@@ -99,23 +100,28 @@ const preguntas = [
     },
 ];
 
+function imprimirOpcionRespuesta(respuestasPregunta, numeroDePregunta) {
+    const respuestas = [];
+    Object.entries(respuestasPregunta).forEach(entry => {
+        const [key, value] = entry;
+        respuestas.push(`<label>
+        <input type="radio" name="${numeroDePregunta}" value="${key}"/>
+        ${key} : ${value}
+    </label>`);
+    });
+    return respuestas;
+
+}
+
 function mostrarTest() {
     const preguntasYrespuestas = [];
 
     preguntas.forEach((preguntaActual, numeroDePregunta) => {
-        const respuestas = [];
-
-        for (letraRespuesta in preguntaActual.respuestas) {
-            respuestas.push(
-                `<label>
-                    <input type="radio" name="${numeroDePregunta}" value="${letraRespuesta}"/>
-                    ${letraRespuesta} : ${preguntaActual.respuestas[letraRespuesta]}
-                </label>`
-            );
-        }
+        const respuestasPregunta = {...preguntaActual.respuestas};
+        const respuestasImpresas = imprimirOpcionRespuesta(respuestasPregunta, numeroDePregunta);
         preguntasYrespuestas.push(
             `<div class="cuestion">${preguntaActual.pregunta}</div>
-            <div class="respuestas"> ${respuestas.join("")} </div>
+            <div class="respuestas"> ${respuestasImpresas.join("")} </div>
             `
         );
     });
@@ -124,7 +130,7 @@ function mostrarTest() {
 }
 
 mostrarTest();
-
+ // Función para comprobar las respuestas correctas e incorrectas.
 function mostrarResultado() {
     const respuestas = contenedor.querySelectorAll(".respuestas");
     let respuestasCorrectas = 0;
@@ -134,21 +140,14 @@ function mostrarResultado() {
         const checkboxRespuestas = `input[name='${numeroDePregunta}']:checked`;
         const respuestaElegida = (todasLasRespuestas.querySelector(checkboxRespuestas) || {}
         ).value;
-
-        if (respuestaElegida === preguntaActual.respuestaCorrecta) {
-            respuestasCorrectas++;
-
-            respuestas[numeroDePregunta].style.color = 'blue';
-        } else {
-            respuestas[numeroDePregunta].style.color = 'red';
-        }
+        respuestaElegida == preguntaActual.respuestaCorrecta ? (respuestas[numeroDePregunta].style.color = 'green', (respuestasCorrectas++)) :
+    respuestas[numeroDePregunta].style.color = 'red'
     });
 
     resultadoTest.innerHTML =
-        "Usted ha acertado " +
-        respuestasCorrectas +
-        " preguntas de un total de " +
-        preguntas.length;
+        "Usted ha acertado " + respuestasCorrectas + " preguntas de un total de " + preguntas.length;
 }
 
 botonRes.addEventListener('click', mostrarResultado);
+
+
