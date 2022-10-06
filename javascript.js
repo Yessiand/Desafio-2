@@ -2,7 +2,6 @@
 formulario.addEventListener("submit", validarFormulario);
 function validarFormulario(event) {
     event.preventDefault();
-
     // Se inicializan las variables que contendran los objetos del formulario HTML
     let nombreRegistro = document.querySelector("#nombre");
     let emailRegistro = document.querySelector("#email");
@@ -16,26 +15,40 @@ function validarFormulario(event) {
     }
 
     // Se accede a los valores del objeto y se muestra un mensaje por pantalla
-    const {nombre,email,mensaje} = registro;
+    const { nombre, email, mensaje } = registro;
     console.log(nombre + ' - ' + email + ' - ' + mensaje);
-    alert("Muchas gracias " + nombre + " por enviar el formulario");
 
-    // Se codifica el objeto como un JSON String y se almacena en el LocalStorage
-    const objetoRegistroComoJsonString = JSON.stringify(registro);
-    localStorage.setItem("formularioRegistro", objetoRegistroComoJsonString);
+    Swal.fire({
+        title: 'Desea guardar la informacion?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        denyButtonText: `No guardar`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire('Guardado!', '', 'success');
+            // Se codifica el objeto como un JSON String y se almacena en el LocalStorage
+            const objetoRegistroComoJsonString = JSON.stringify(registro);
+            localStorage.setItem("formularioRegistro", objetoRegistroComoJsonString);
 
-    // Se decodfica el objeto almacenado en el LocalStorage para poder acceder a sus valores guardados.
-    let objetoRegistroDecodificado = JSON.parse(localStorage.getItem("formularioRegistro"));
-    console.log(objetoRegistroDecodificado.mensaje);
+            // Se decodfica el objeto almacenado en el LocalStorage para poder acceder a sus valores guardados.
+            let objetoRegistroDecodificado = JSON.parse(localStorage.getItem("formularioRegistro"));
+            console.log(objetoRegistroDecodificado.mensaje);
+        } else if (result.isDenied) {
+            Swal.fire('Información no guardada.', '', 'info')
+        }
+    })
 }
 
-//CONTADOR DE TIEMPO//
 
+
+//CONTADOR DE TIEMPO//
+let intervalTime = null;
 function startTimer(duration, display) {
     var timer = duration,
         minutes,
         seconds;
-    setInterval(function () {
+    intervalTime = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -43,20 +56,33 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         display.textContent = minutes + ":" + seconds;
-
-        if (--timer < 0) {
+        console.log("timer:" + timer);
+        if (timer == 0) {
+            Swal.fire({
+                title: 'El tiempo ha terminado!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            clearInterval(intervalTime);
+            mostrarResultado();
+        } else if (--timer < 0) {
             timer = duration;
         }
     }, 1000);
+
+    
 }
 function iniciarTest() {
-    var fiveMinutes = 60 * 5,
-    display = document.querySelector("#time");
+    var fiveMinutes = 10,
+        display = document.querySelector("#time");
     startTimer(fiveMinutes, display);
 }
 
 //SIMULADOR DE PREGUNTAS//
-
 const contenedor = document.getElementById("test");
 const botonRes = document.getElementById("boton");
 const resultadoTest = document.getElementById("resultado");
@@ -117,7 +143,7 @@ function mostrarTest() {
     const preguntasYrespuestas = [];
 
     preguntas.forEach((preguntaActual, numeroDePregunta) => {
-        const respuestasPregunta = {...preguntaActual.respuestas};
+        const respuestasPregunta = { ...preguntaActual.respuestas };
         const respuestasImpresas = imprimirOpcionRespuesta(respuestasPregunta, numeroDePregunta);
         preguntasYrespuestas.push(
             `<div class="cuestion">${preguntaActual.pregunta}</div>
@@ -130,7 +156,7 @@ function mostrarTest() {
 }
 
 mostrarTest();
- // Función para comprobar las respuestas correctas e incorrectas.
+// Función para comprobar las respuestas correctas e incorrectas.
 function mostrarResultado() {
     const respuestas = contenedor.querySelectorAll(".respuestas");
     let respuestasCorrectas = 0;
@@ -141,13 +167,14 @@ function mostrarResultado() {
         const respuestaElegida = (todasLasRespuestas.querySelector(checkboxRespuestas) || {}
         ).value;
         respuestaElegida == preguntaActual.respuestaCorrecta ? (respuestas[numeroDePregunta].style.color = 'green', (respuestasCorrectas++)) :
-    respuestas[numeroDePregunta].style.color = 'red'
+            respuestas[numeroDePregunta].style.color = 'red'
     });
 
     resultadoTest.innerHTML =
         "Usted ha acertado " + respuestasCorrectas + " preguntas de un total de " + preguntas.length;
+
+    if (respuestasCorrectas == 4) {
+        clearInterval(intervalTime);
+    }
 }
-
 botonRes.addEventListener('click', mostrarResultado);
-
-
