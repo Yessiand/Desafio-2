@@ -1,5 +1,7 @@
+emailjs.init('YufpKr7nll0HWSYU8');
 //REGISTRO PARA EL TEST//
 formulario.addEventListener("submit", validarFormulario);
+
 function validarFormulario(event) {
     event.preventDefault();
     // Se inicializan las variables que contendran los objetos del formulario HTML
@@ -26,7 +28,6 @@ function validarFormulario(event) {
         denyButtonText: `No guardar`,
     }).then((result) => {
         if (result.isConfirmed) {
-            Swal.fire('Guardado!', '', 'success');
             // Se codifica el objeto como un JSON String y se almacena en el LocalStorage
             const objetoRegistroComoJsonString = JSON.stringify(registro);
             localStorage.setItem("formularioRegistro", objetoRegistroComoJsonString);
@@ -34,13 +35,28 @@ function validarFormulario(event) {
             // Se decodfica el objeto almacenado en el LocalStorage para poder acceder a sus valores guardados.
             let objetoRegistroDecodificado = JSON.parse(localStorage.getItem("formularioRegistro"));
             console.log(objetoRegistroDecodificado.mensaje);
+
+            // Se consume la API de EmailJS para enviar el correo electronico con la informacion del formulario.
+            var formData = new FormData(this);
+            formData.append('service_id', 'default_service');
+            formData.append('template_id', 'template_wksfocp');
+            formData.append('user_id', 'YufpKr7nll0HWSYU8');
+
+            $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
+                type: 'POST',
+                data: formData,
+                contentType: false, // auto-detection
+                processData: false // no need to parse formData to string
+            }).done(function() {
+                Swal.fire('Guardado!', '', 'success');
+            }).fail(function(error) {
+                Swal.fire('Información no guardada.', '', 'info')
+            });
         } else if (result.isDenied) {
             Swal.fire('Información no guardada.', '', 'info')
         }
     })
 }
-
-
 
 //CONTADOR DE TIEMPO//
 let intervalTime = null;
@@ -73,8 +89,6 @@ function startTimer(duration, display) {
             timer = duration;
         }
     }, 1000);
-
-    
 }
 function iniciarTest() {
     var fiveMinutes = 10,
