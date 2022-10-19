@@ -28,6 +28,7 @@ function validarFormulario(event) {
         denyButtonText: `No guardar`,
     }).then((result) => {
         if (result.isConfirmed) {
+            
             // Se codifica el objeto como un JSON String y se almacena en el LocalStorage
             const objetoRegistroComoJsonString = JSON.stringify(registro);
             localStorage.setItem("formularioRegistro", objetoRegistroComoJsonString);
@@ -36,22 +37,18 @@ function validarFormulario(event) {
             let objetoRegistroDecodificado = JSON.parse(localStorage.getItem("formularioRegistro"));
             console.log(objetoRegistroDecodificado.mensaje);
 
-            // Se consume la API de EmailJS para enviar el correo electronico con la informacion del formulario.
-            var formData = new FormData(this);
-            formData.append('service_id', 'default_service');
-            formData.append('template_id', 'template_wksfocp');
-            formData.append('user_id', 'YufpKr7nll0HWSYU8');
+            const serviceID = 'default_service';
+            const templateID = 'template_g8vo2kk';
 
-            $.ajax('https://api.emailjs.com/api/v1.0/email/send-form', {
-                type: 'POST',
-                data: formData,
-                contentType: false, // auto-detection
-                processData: false // no need to parse formData to string
-            }).done(function() {
-                Swal.fire('Guardado!', '', 'success');
-            }).fail(function(error) {
-                Swal.fire('Información no guardada.', '', 'info')
-            });
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    Swal.fire('Guardado!', '', 'success');
+                }, (err) => {
+                    Swal.fire('Información no guardada.', '', 'info')
+                    console.log(JSON.stringify(err));
+                });
+
+
         } else if (result.isDenied) {
             Swal.fire('Información no guardada.', '', 'info')
         }
@@ -137,6 +134,15 @@ const preguntas = [
             c: "Familia",
         },
         respuestaCorrecta: "c",
+    },
+    {
+        pregunta: "5. Interviene en los problemas que presentan los individuos, las parejas, las familias y los grupos de inmigrantes, abordando la influencia que tienen tanto los aspectos individuales como los culturales, sociales, económicos, políticos y jurídicos en la aparición de los mismos y en su resolución",
+        respuestas: {
+            a: "Psicoterapia transcultural ecosistémica",
+            b: "Psicoterapia transgeneracional",
+            c: "Terapia centrada en la familia",
+        },
+        respuestaCorrecta: "a",
     },
 ];
 
