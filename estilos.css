@@ -34,80 +34,79 @@ form {
     width: 100%;
 }
 .enviar {
-    background-color: #7a2460;
+    background:#900C3F;
     color: #ffffff;
     font-size: 23px;
     margin-top: 5%;
     border-radius: 1cm;
     margin-block-end: 4%;
+    box-shadow:0 0 40px 40px #7a2460 inset, 0 0 0 0 #9e0678;
+	text-decoration: none;
+    -webkit-transition: all 150ms ease-in-out;
+	transition: all ease 0.5s;
 }
+.enviar:hover {
+    box-shadow: 0 1px 6px 0 #20212447;
+}
+
 
 
 /* SIMULADOR */
 .boton {
-    background-image: linear-gradient(180deg, #681464, #e65e92);
     color: #ffffff;
     transform: translateX(600px);
     font-size: 26px ; 
     border-width: 1px;
     width: 15%;
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.1);
+    box-shadow:0 0 40px 40px #7a2460 inset, 0 0 0 0 #9e0678;
 	text-decoration: none;
+    -webkit-transition: all 150ms ease-in-out;
 	transition: all ease 0.5s;
 	background:#900C3F;
 }
-.boton:after,
-.boton:before{
-	width: 80px;
-	height: 100px;
-	content: '';
-	display: block;
-	background: rgba(255, 255, 255, 0.986);
-	transform: rotate(45deg);
-	top: -60px;
-	position: absolute;
-	transition: none;
-	right:-45%;
-	cursor: pointer;
-}
-.boton:before{
-	left: -48%;
+.boton:hover {
+    box-shadow: 0 1px 6px 0 #20212447;
 }
 
-.boton:hover{
-	text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-	background:#ad0676
-}
-.boton:hover:after,
-.boton:hover:before{
-	transform: rotate(45deg), scaleX(130%);
-	background: rgba(255,255,255,0.1);
-	transition: all ease 0.5s;
-}
-.boton:hover:after{
-	right: 130%;
-}
-.boton:hover:before{
-	left: 130%;
-}
 
 #titulo {
     width: 20%;
     transform: translateX(600px);
     margin-top: 2%;
+    display: table;
+}
+#titulo::after {
+    content: "";
+    display: block;
+    height: 3px;
+    background-color: #900C3F;
+    transform: scale(0,1);
+    transform-origin:center;
+    transition: transform .25s;
+}
+#titulo:hover::after {
+    transform: scale(1,1);
 }
 .parrafo {
     margin-left: 1%;
 }
 #boton {
-    background-color: #7a2460;
+    background:#900C3F;
     color: #ffffff;
     font-size: 22px;
     margin-top: 5%;
     border-radius: 1cm;
     margin-block-end: 4%;
-    transform: translateX(342%)
-    
+    transform: translateX(342%);
+    box-shadow:0 0 40px 40px #7a2460 inset, 0 0 0 0 #9e0678;
+    text-decoration: none;
+    -webkit-transition: all 150ms ease-in-out;
+	transition: all ease 0.5s;
+
+}
+
+#boton:hover {
+    box-shadow: 0 1px 6px 0 #20212447;
 }
 
 
